@@ -7,7 +7,13 @@
 <title>AI Domain Portfolio</title>
 <meta name="description" content="Premium Turkish AI, data and automation domains.">
 
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZJKGYX6K4"></script>
 <script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+
 const DOMAIN_CONFIG = {
     "skorlama.com": {
         title: "Skorlama.com",
@@ -58,17 +64,10 @@ const hostname = window.location.hostname;
 const current = DOMAIN_CONFIG[hostname];
 
 if (current && current.ga) {
-    const gaScript = document.createElement("script");
-    gaScript.async = true;
-    gaScript.src = "https://www.googletagmanager.com/gtag/js?id=" + current.ga;
-    document.head.appendChild(gaScript);
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    window.gtag = gtag;
-
-    gtag("js", new Date());
-    gtag("config", current.ga);
+    gtag("config", current.ga, {
+        page_title: document.title,
+        page_location: window.location.href
+    });
 }
 </script>
 
@@ -195,19 +194,25 @@ body{
 <div class="card">
     <h2>satinalai.com</h2>
     <p>AI destekli satın alma ve tedarik süreçleri için premium domain.</p>
-    <a href="mailto:hello@satinalai.com" class="button">İletişim</a>
+    <a href="mailto:sahinemre@outlook.com?subject=satinalai.com Domain Inquiry&body=Merhaba,%0D%0A%0D%0Asatinalai.com domaini hakkında bilgi almak istiyorum.%0D%0A%0D%0ATeşekkürler." class="button">
+        İletişime Geç
+    </a>
 </div>
 
 <div class="card">
     <h2>skorlama.com</h2>
     <p>Finansal analiz, puanlama ve veri istihbaratı projeleri için.</p>
-    <a href="mailto:hello@skorlama.com" class="button">İletişim</a>
+    <a href="mailto:sahinemre@outlook.com?subject=skorlama.com Domain Inquiry&body=Merhaba,%0D%0A%0D%0Askorlama.com domaini hakkında bilgi almak istiyorum.%0D%0A%0D%0ATeşekkürler." class="button">
+        İletişime Geç
+    </a>
 </div>
 
 <div class="card">
     <h2>kiralaai.com</h2>
     <p>Kiralama, araç, emlak ve hizmet platformları için AI odaklı domain.</p>
-    <a href="mailto:hello@kiralaai.com" class="button">İletişim</a>
+    <a href="mailto:sahinemre@outlook.com?subject=kiralaai.com Domain Inquiry&body=Merhaba,%0D%0A%0D%0Akiralaai.com domaini hakkında bilgi almak istiyorum.%0D%0A%0D%0ATeşekkürler." class="button">
+        İletişime Geç
+    </a>
 </div>
 
 </div>
