@@ -3,7 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>AI Domain Portfolio</title>
+<meta name="description" content="Premium Turkish AI, data and automation domains.">
+
+<script>
+const DOMAIN_CONFIG = {
+    "skorlama.com": {
+        title: "Skorlama.com",
+        subtitle: "Finansal analiz, puanlama ve veri istihbaratı için premium domain.",
+        ga: "G-NZJKGYX6K4"
+    },
+    "www.skorlama.com": {
+        title: "Skorlama.com",
+        subtitle: "Finansal analiz, puanlama ve veri istihbaratı için premium domain.",
+        ga: "G-NZJKGYX6K4"
+    },
+
+    "kiralaai.com": {
+        title: "KiralaAI.com",
+        subtitle: "Kiralama süreçleri için yapay zeka destekli yeni nesil domain.",
+        ga: "G-647TPGNPXP"
+    },
+    "www.kiralaai.com": {
+        title: "KiralaAI.com",
+        subtitle: "Kiralama süreçleri için yapay zeka destekli yeni nesil domain.",
+        ga: "G-647TPGNPXP"
+    },
+
+    "kiralaia.com": {
+        title: "KiralaIA.com",
+        subtitle: "Kiralama süreçleri için yapay zeka destekli yeni nesil domain.",
+        ga: "G-647TPGNPXP"
+    },
+    "www.kiralaia.com": {
+        title: "KiralaIA.com",
+        subtitle: "Kiralama süreçleri için yapay zeka destekli yeni nesil domain.",
+        ga: "G-647TPGNPXP"
+    },
+
+    "satinalai.com": {
+        title: "SatınAlAI.com",
+        subtitle: "AI destekli satın alma ve tedarik süreçleri için premium domain.",
+        ga: "G-QP65KDBK93"
+    },
+    "www.satinalai.com": {
+        title: "SatınAlAI.com",
+        subtitle: "AI destekli satın alma ve tedarik süreçleri için premium domain.",
+        ga: "G-QP65KDBK93"
+    }
+};
+
+const hostname = window.location.hostname;
+const current = DOMAIN_CONFIG[hostname];
+
+if (current && current.ga) {
+    const gaScript = document.createElement("script");
+    gaScript.async = true;
+    gaScript.src = "https://www.googletagmanager.com/gtag/js?id=" + current.ga;
+    document.head.appendChild(gaScript);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+
+    gtag("js", new Date());
+    gtag("config", current.ga);
+}
+</script>
 
 <style>
 *{
@@ -13,7 +80,10 @@
 }
 
 body{
-    background:#0f1117;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at top, rgba(0,229,168,0.18), transparent 35%),
+        #0f1117;
     color:white;
     font-family:Arial, Helvetica, sans-serif;
 }
@@ -29,14 +99,27 @@ body{
     margin-bottom:60px;
 }
 
+.badge{
+    display:inline-block;
+    margin-bottom:18px;
+    padding:8px 14px;
+    border:1px solid #00e5a8;
+    border-radius:999px;
+    color:#00e5a8;
+    font-size:14px;
+}
+
 .hero h1{
-    font-size:48px;
+    font-size:52px;
     margin-bottom:15px;
 }
 
 .hero p{
     color:#9ca3af;
-    font-size:18px;
+    font-size:19px;
+    max-width:680px;
+    margin:auto;
+    line-height:1.6;
 }
 
 .grid{
@@ -46,7 +129,7 @@ body{
 }
 
 .card{
-    background:#161b22;
+    background:rgba(22,27,34,0.9);
     border:1px solid #30363d;
     border-radius:16px;
     padding:25px;
@@ -82,6 +165,17 @@ body{
     text-align:center;
     margin-top:70px;
     color:#6b7280;
+    font-size:14px;
+}
+
+@media(max-width:600px){
+    .hero h1{
+        font-size:36px;
+    }
+
+    .container{
+        padding-top:55px;
+    }
 }
 </style>
 </head>
@@ -91,37 +185,46 @@ body{
 <div class="container">
 
 <div class="hero">
-<h1>AI Domain Portfolio</h1>
-<p>Premium Turkish AI & Data Domains</p>
+    <div class="badge">Premium AI Domain</div>
+    <h1 id="pageTitle">AI Domain Portfolio</h1>
+    <p id="pageSubtitle">Premium Turkish AI & Data Domains</p>
 </div>
 
 <div class="grid">
 
 <div class="card">
-<h2>satinalai.com</h2>
-<p>AI destekli satın alma ve tedarik süreçleri için premium domain.</p>
-<a href="mailto:hello@satinalai.com" class="button">İletişim</a>
+    <h2>satinalai.com</h2>
+    <p>AI destekli satın alma ve tedarik süreçleri için premium domain.</p>
+    <a href="mailto:hello@satinalai.com" class="button">İletişim</a>
 </div>
 
 <div class="card">
-<h2>skorlama.com</h2>
-<p>Finansal analiz, puanlama ve veri istihbaratı projeleri için.</p>
-<a href="mailto:hello@skorlama.com" class="button">İletişim</a>
+    <h2>skorlama.com</h2>
+    <p>Finansal analiz, puanlama ve veri istihbaratı projeleri için.</p>
+    <a href="mailto:hello@skorlama.com" class="button">İletişim</a>
 </div>
 
 <div class="card">
-<h2>skorlamaai.com</h2>
-<p>Yapay zeka destekli skorlama ve karar sistemleri.</p>
-<a href="mailto:hello@skorlamaai.com" class="button">İletişim</a>
+    <h2>kiralaai.com</h2>
+    <p>Kiralama, araç, emlak ve hizmet platformları için AI odaklı domain.</p>
+    <a href="mailto:hello@kiralaai.com" class="button">İletişim</a>
 </div>
 
 </div>
 
 <div class="footer">
-© 2026 Domain Portfolio
+    © 2026 AI Domain Portfolio
 </div>
 
 </div>
+
+<script>
+if (current) {
+    document.title = current.title;
+    document.getElementById("pageTitle").innerText = current.title;
+    document.getElementById("pageSubtitle").innerText = current.subtitle;
+}
+</script>
 
 </body>
 </html>
