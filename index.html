@@ -7,10 +7,8 @@
 <title>AI Domain Portfolio</title>
 <meta name="description" content="Premium AI, data and automation domains.">
 
-<!-- Google Analytics Tags -->
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZJKGYX6K4"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-647TPGNPXP"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QP65KDBK93"></script>
 
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -56,10 +54,15 @@ const hostname = window.location.hostname;
 const current = DOMAIN_CONFIG[hostname];
 
 if (current && current.ga) {
+
+    // Send page view only to the current domain's GA property
     gtag("config", current.ga, {
         page_title: current.title,
-        page_location: window.location.href
+        page_location: window.location.href,
+        send_page_view: true
     });
+
+    console.log("Google Analytics:", current.ga);
 }
 </script>
 
