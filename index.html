@@ -7,8 +7,11 @@
 <title>AI Domain Portfolio</title>
 <meta name="description" content="Premium Turkish AI, data and automation domains.">
 
-<!-- Google Analytics -->
+<!-- Google Analytics Tags -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZJKGYX6K4"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-647TPGNPXP"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QP65KDBK93"></script>
+
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -37,17 +40,6 @@ const DOMAIN_CONFIG = {
         ga: "G-647TPGNPXP"
     },
 
-    "kiralaia.com": {
-        title: "KiralaIA.com",
-        subtitle: "Kiralama süreçleri için yapay zeka destekli yeni nesil domain.",
-        ga: "G-647TPGNPXP"
-    },
-    "www.kiralaia.com": {
-        title: "KiralaIA.com",
-        subtitle: "Kiralama süreçleri için yapay zeka destekli yeni nesil domain.",
-        ga: "G-647TPGNPXP"
-    },
-
     "satinalai.com": {
         title: "SatınAlAI.com",
         subtitle: "AI destekli satın alma ve tedarik süreçleri için premium domain.",
@@ -65,7 +57,7 @@ const current = DOMAIN_CONFIG[hostname];
 
 if (current && current.ga) {
     gtag("config", current.ga, {
-        page_title: document.title,
+        page_title: current.title,
         page_location: window.location.href
     });
 }
@@ -160,9 +152,31 @@ body{
     font-weight:bold;
 }
 
+.contact-box{
+    margin-top:55px;
+    padding:24px;
+    border:1px solid #30363d;
+    border-radius:16px;
+    background:rgba(22,27,34,0.75);
+    text-align:center;
+}
+
+.contact-box p{
+    color:#9ca3af;
+    margin-bottom:8px;
+}
+
+.contact-box a{
+    color:#00e5a8;
+    font-size:20px;
+    font-weight:bold;
+    text-decoration:none;
+    word-break:break-all;
+}
+
 .footer{
     text-align:center;
-    margin-top:70px;
+    margin-top:35px;
     color:#6b7280;
     font-size:14px;
 }
@@ -174,6 +188,10 @@ body{
 
     .container{
         padding-top:55px;
+    }
+
+    .contact-box a{
+        font-size:17px;
     }
 }
 </style>
@@ -215,6 +233,11 @@ body{
     </a>
 </div>
 
+</div>
+
+<div class="contact-box">
+    <p>Business inquiries</p>
+    <a href="mailto:sahinemre@outlook.com">sahinemre@outlook.com</a>
 </div>
 
 <div class="footer">
