@@ -15,7 +15,23 @@ function gtag(){dataLayer.push(arguments);}
 gtag("js", new Date());
 
 const GA_ID = "G-NZJKGYX6K4";
-const PAGE_HOST = window.location.hostname.replace("www.", "");
+
+const RAW_HOST = window.location.hostname.replace("www.", "");
+
+const HOST_MAP = {
+    "skorlama.com": "Skorlama.com",
+    "satinalai.com": "SatinalAI.com",
+    "kiralaai.com": "KiralaAI.com",
+    "temizai.com": "TemizAI.com",
+    "pintiai.com": "PintiAI.com",
+    "novqai.com": "NovqAI.com",
+
+    "xn--satnalai-vkb.com": "SatınAlAI.com",
+    "xn--frsatai-rfb.com": "FırsatAI.com",
+    "xn--hafzaai-tfb.com": "HafızaAI.com"
+};
+
+const PAGE_HOST = HOST_MAP[RAW_HOST] || RAW_HOST;
 const PAGE_URL = window.location.href;
 
 gtag("config", GA_ID, {
@@ -26,6 +42,7 @@ gtag("config", GA_ID, {
 
 gtag("event", "portfolio_view", {
     page_host: PAGE_HOST,
+    raw_host: RAW_HOST,
     page_url: PAGE_URL
 });
 </script>
@@ -346,7 +363,8 @@ function openOffer(domainName){
 
     gtag("event", "offer_click", {
         domain_name: domainName,
-        page_host: window.location.hostname
+        page_host: PAGE_HOST,
+        raw_host: RAW_HOST
     });
 }
 
@@ -357,7 +375,8 @@ function closeModal(){
 function trackRequestInfo(domainName){
     gtag("event", "request_info_click", {
         domain_name: domainName,
-        page_host: window.location.hostname
+        page_host: PAGE_HOST,
+        raw_host: RAW_HOST
     });
 }
 
@@ -370,7 +389,8 @@ function sendOffer(){
 
     gtag("event", "offer_submit", {
         domain_name: selectedDomain,
-        page_host: window.location.hostname
+        page_host: PAGE_HOST,
+        raw_host: RAW_HOST
     });
 
     const subject = encodeURIComponent(selectedDomain + " - Domain Offer");
