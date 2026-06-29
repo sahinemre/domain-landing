@@ -15,15 +15,18 @@ function gtag(){dataLayer.push(arguments);}
 gtag("js", new Date());
 
 const GA_ID = "G-NZJKGYX6K4";
+const PAGE_HOST = window.location.hostname.replace("www.", "");
+const PAGE_URL = window.location.href;
 
 gtag("config", GA_ID, {
-    page_title: document.title,
-    page_location: window.location.href,
+    page_title: PAGE_HOST,
+    page_location: PAGE_URL,
     send_page_view: true
 });
 
 gtag("event", "portfolio_view", {
-    page_host: window.location.hostname
+    page_host: PAGE_HOST,
+    page_url: PAGE_URL
 });
 </script>
 
