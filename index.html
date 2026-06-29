@@ -4,88 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Domain Portfolio</title>
-<meta name="description" content="Premium AI, data and automation domains.">
+<title>Premium AI Domains</title>
+<meta name="description" content="Curated premium .com AI domains for startups, automation, fintech and next-generation technology companies.">
 
-<!-- Google Analytics -->
+<!-- Google Analytics - Single Property -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZJKGYX6K4"></script>
-
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag("js", new Date());
 
-const DOMAIN_CONFIG = {
-    
-    "skorlama.com": {
-        title: "Skorlama.com",
-        subtitle: "Premium domain for AI scoring, financial analytics, risk assessment and data intelligence platforms.",
-        ga: "G-NZJKGYX6K4"
-    },
-    "www.skorlama.com": {
-        title: "Skorlama.com",
-        subtitle: "Premium domain for AI scoring, financial analytics, risk assessment and data intelligence platforms.",
-        ga: "G-NZJKGYX6K4"
-    },
+const GA_ID = "G-NZJKGYX6K4";
 
-    "kiralaai.com": {
-        title: "KiralaAI.com",
-        subtitle: "Premium domain for AI-powered rental marketplaces, property leasing and vehicle rental platforms.",
-        ga: "G-647TPGNPXP"
-    },
-    "www.kiralaai.com": {
-        title: "KiralaAI.com",
-        subtitle: "Premium domain for AI-powered rental marketplaces, property leasing and vehicle rental platforms.",
-        ga: "G-647TPGNPXP"
-    },
+gtag("config", GA_ID, {
+    page_title: document.title,
+    page_location: window.location.href,
+    send_page_view: true
+});
 
-    "satinalai.com": {
-        title: "SatinalAI.com",
-        subtitle: "Premium domain for AI-powered procurement, sourcing and purchasing platforms.",
-        ga: "G-QP65KDBK93"
-    },
-    "www.satinalai.com": {
-        title: "SatinalAI.com",
-        subtitle: "Premium domain for AI-powered procurement, sourcing and purchasing platforms.",
-        ga: "G-QP65KDBK93"
-    }
-        
-    "xn--satnalai-vkb.com": {
-        title: "SatinalAI.com",
-        subtitle: "Premium domain for AI-powered procurement, sourcing and purchasing platforms.",
-        ga: "G-QP65KDBK93"
-    },
-    
-    "www.xn--satnalai-vkb.com": {
-        title: "SatinalAI.com",
-        subtitle: "Premium domain for AI-powered procurement, sourcing and purchasing platforms.",
-        ga: "G-QP65KDBK93"
-    }
-    
-};
-
-const hostname = window.location.hostname;
-const current = DOMAIN_CONFIG[hostname];
-
-if (current && current.ga) {
-
-    // Send page view only to the current domain's GA property
-    gtag("config", current.ga, {
-        page_title: current.title,
-        page_location: window.location.href,
-        send_page_view: true
-    });
-
-    console.log("Google Analytics:", current.ga);
-}
+gtag("event", "portfolio_view", {
+    page_host: window.location.hostname
+});
 </script>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
     min-height:100vh;
@@ -97,14 +40,14 @@ body{
 }
 
 .container{
-    max-width:1100px;
+    max-width:1180px;
     margin:auto;
-    padding:80px 20px;
+    padding:75px 20px;
 }
 
 .hero{
     text-align:center;
-    margin-bottom:60px;
+    margin-bottom:55px;
 }
 
 .badge{
@@ -125,7 +68,7 @@ body{
 .hero p{
     color:#9ca3af;
     font-size:19px;
-    max-width:680px;
+    max-width:760px;
     margin:auto;
     line-height:1.6;
 }
@@ -141,7 +84,7 @@ body{
     border:1px solid #30363d;
     border-radius:16px;
     padding:25px;
-    transition:0.3s;
+    transition:0.25s;
 }
 
 .card:hover{
@@ -149,8 +92,16 @@ body{
     border-color:#00e5a8;
 }
 
+.tag{
+    display:inline-block;
+    color:#00e5a8;
+    font-size:13px;
+    margin-bottom:14px;
+}
+
 .card h2{
     margin-bottom:12px;
+    font-size:25px;
 }
 
 .card p{
@@ -159,14 +110,28 @@ body{
     line-height:1.5;
 }
 
+.actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
 .button{
+    border:0;
+    cursor:pointer;
     display:inline-block;
-    padding:10px 18px;
+    padding:10px 16px;
     border-radius:8px;
     background:#00e5a8;
     color:black;
     text-decoration:none;
     font-weight:bold;
+}
+
+.button.secondary{
+    background:transparent;
+    color:#00e5a8;
+    border:1px solid #00e5a8;
 }
 
 .contact-box{
@@ -198,18 +163,62 @@ body{
     font-size:14px;
 }
 
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.72);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:99;
+}
+
+.modal.open{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:480px;
+    background:#161b22;
+    border:1px solid #30363d;
+    border-radius:16px;
+    padding:24px;
+}
+
+.modal-box h2{
+    margin-bottom:6px;
+}
+
+.modal-box p{
+    color:#9ca3af;
+    margin-bottom:18px;
+}
+
+.input{
+    width:100%;
+    margin-bottom:12px;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #30363d;
+    background:#0f1117;
+    color:white;
+}
+
+.close{
+    float:right;
+    background:none;
+    border:0;
+    color:#9ca3af;
+    font-size:24px;
+    cursor:pointer;
+}
+
 @media(max-width:600px){
-    .hero h1{
-        font-size:36px;
-    }
-
-    .container{
-        padding-top:55px;
-    }
-
-    .contact-box a{
-        font-size:17px;
-    }
+    .hero h1{font-size:36px}
+    .container{padding-top:55px}
+    .contact-box a{font-size:17px}
 }
 </style>
 </head>
@@ -218,56 +227,165 @@ body{
 
 <div class="container">
 
-<div class="hero">
-    <div class="badge">Premium AI Domains</div>
-    <h1 id="pageTitle">AI Domain Portfolio</h1>
-    <p id="pageSubtitle">Premium AI Domains for Future Businesses</p>
-</div>
+    <div class="hero">
+        <div class="badge">Premium AI Domains For Sale</div>
+        <h1>Premium AI Domains</h1>
+        <p>
+            Curated collection of premium .com domains for AI startups,
+            automation, fintech, procurement, analytics and next-generation technology companies.
+        </p>
+    </div>
 
-<div class="grid">
+    <div class="grid" id="domainGrid"></div>
 
-<div class="card">
-    <h2>satinalai.com</h2>
-    <p>Premium domain for AI-powered procurement, sourcing and purchasing platforms.</p>
-    <a href="mailto:sahinemre@outlook.com?subject=satinalai.com Domain Inquiry&body=Hello,%0D%0A%0D%0AI am interested in satinalai.com and would like to receive more information.%0D%0A%0D%0AThank you." class="button">
-        Request Information
-    </a>
-</div>
+    <div class="contact-box">
+        <p>Business inquiries</p>
+        <a href="mailto:sahinemre@outlook.com">sahinemre@outlook.com</a>
+    </div>
 
-<div class="card">
-    <h2>skorlama.com</h2>
-    <p>Perfect for AI scoring, financial analytics, risk assessment and data intelligence products.</p>
-    <a href="mailto:sahinemre@outlook.com?subject=skorlama.com Domain Inquiry&body=Hello,%0D%0A%0D%0AI am interested in skorlama.com and would like to receive more information.%0D%0A%0D%0AThank you." class="button">
-        Request Information
-    </a>
-</div>
-
-<div class="card">
-    <h2>kiralaai.com</h2>
-    <p>Ideal for AI-powered rental marketplaces, property leasing and vehicle rental platforms.</p>
-    <a href="mailto:sahinemre@outlook.com?subject=kiralaai.com Domain Inquiry&body=Hello,%0D%0A%0D%0AI am interested in kiralaai.com and would like to receive more information.%0D%0A%0D%0AThank you." class="button">
-        Request Information
-    </a>
-</div>
+    <div class="footer">
+        © 2026 Premium AI Domain Portfolio
+    </div>
 
 </div>
 
-<div class="contact-box">
-    <p>Business inquiries</p>
-    <a href="mailto:sahinemre@outlook.com">sahinemre@outlook.com</a>
-</div>
+<div class="modal" id="offerModal">
+    <div class="modal-box">
+        <button class="close" onclick="closeModal()">×</button>
+        <h2>Make an Offer</h2>
+        <p id="modalDomainText"></p>
 
-<div class="footer">
-    © 2026 AI Domain Portfolio
-</div>
+        <input class="input" id="name" placeholder="Your name">
+        <input class="input" id="email" placeholder="Email">
+        <input class="input" id="company" placeholder="Company">
+        <input class="input" id="offer" placeholder="Offer amount / USD">
+        <textarea class="input" id="message" rows="4" placeholder="Message"></textarea>
 
+        <button class="button" onclick="sendOffer()">Send Offer</button>
+    </div>
 </div>
 
 <script>
-if (current) {
-    document.title = current.title;
-    document.getElementById("pageTitle").innerText = current.title;
-    document.getElementById("pageSubtitle").innerText = current.subtitle;
+const DOMAINS = [
+    {
+        name:"skorlama.com",
+        category:"AI Scoring & Analytics",
+        description:"Premium domain for AI scoring, financial analytics, risk assessment and data intelligence products."
+    },
+    {
+        name:"satinalai.com",
+        category:"AI Procurement",
+        description:"Premium domain for AI-powered procurement, sourcing and purchasing platforms."
+    },
+    {
+        name:"satınalai.com",
+        category:"Turkish AI Purchasing",
+        description:"Turkish spelling protection domain for AI-powered purchasing and procurement."
+    },
+    {
+        name:"kiralaai.com",
+        category:"AI Rental Marketplace",
+        description:"Ideal for AI-powered rental marketplaces, property leasing and vehicle rental platforms."
+    },
+    {
+        name:"temizai.com",
+        category:"AI Cleaning & Hygiene",
+        description:"AI domain for cleaning, hygiene, robotics, facility services and home automation."
+    },
+    {
+        name:"hafızaai.com",
+        category:"AI Memory & Knowledge",
+        description:"Premium domain for AI memory, second brain, enterprise knowledge bases and RAG systems."
+    },
+    {
+        name:"fırsatai.com",
+        category:"AI Deals & Opportunities",
+        description:"AI domain for deals, discounts, campaigns, opportunity discovery and price alerts."
+    },
+    {
+        name:"pintiai.com",
+        category:"AI Savings",
+        description:"Memorable AI domain for smart savings, discount hunting and price intelligence."
+    },
+    {
+        name:"novqai.com",
+        category:"Global AI Brand",
+        description:"Short, brandable global AI domain for next-generation technology products."
+    }
+];
+
+const grid = document.getElementById("domainGrid");
+
+DOMAINS.forEach(domain => {
+    grid.innerHTML += `
+        <div class="card">
+            <span class="tag">${domain.category}</span>
+            <h2>${domain.name}</h2>
+            <p>${domain.description}</p>
+            <div class="actions">
+                <button class="button" onclick="openOffer('${domain.name}')">Make an Offer</button>
+                <a class="button secondary"
+                   onclick="trackRequestInfo('${domain.name}')"
+                   href="mailto:sahinemre@outlook.com?subject=${encodeURIComponent(domain.name + ' Domain Inquiry')}">
+                   Request Info
+                </a>
+            </div>
+        </div>
+    `;
+});
+
+let selectedDomain = "";
+
+function openOffer(domainName){
+    selectedDomain = domainName;
+    document.getElementById("modalDomainText").innerText = domainName;
+    document.getElementById("offerModal").classList.add("open");
+
+    gtag("event", "offer_click", {
+        domain_name: domainName,
+        page_host: window.location.hostname
+    });
+}
+
+function closeModal(){
+    document.getElementById("offerModal").classList.remove("open");
+}
+
+function trackRequestInfo(domainName){
+    gtag("event", "request_info_click", {
+        domain_name: domainName,
+        page_host: window.location.hostname
+    });
+}
+
+function sendOffer(){
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const company = document.getElementById("company").value;
+    const offer = document.getElementById("offer").value;
+    const message = document.getElementById("message").value;
+
+    gtag("event", "offer_submit", {
+        domain_name: selectedDomain,
+        page_host: window.location.hostname
+    });
+
+    const subject = encodeURIComponent(selectedDomain + " - Domain Offer");
+    const body = encodeURIComponent(
+`Hello,
+
+I would like to make an offer for ${selectedDomain}.
+
+Name: ${name}
+Email: ${email}
+Company: ${company}
+Offer: ${offer} USD
+
+Message:
+${message}`
+    );
+
+    window.location.href = `mailto:sahinemre@outlook.com?subject=${subject}&body=${body}`;
 }
 </script>
 
