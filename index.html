@@ -1,416 +1,461 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+"use client";
 
-<title>Premium AI Domains</title>
-<meta name="description" content="Curated premium .com AI domains for startups, automation, fintech and next-generation technology companies.">
+import { useState } from "react";
 
-<!-- Google Analytics - Single Property -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZJKGYX6K4"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag("js", new Date());
+export default function Home() {
+  const [form, setForm] = useState({
+    transaction_type: "buy",
+    property_type: "land",
+    city: "",
+    district: "",
+    budget_try: "",
+    holding_period_years: "",
+    risk_preference: "safe",
+    credit_usage: "false",
+    extra_notes: ""
+  });
 
-const GA_ID = "G-142R69BMLW";
+  const [loading, setLoading] = useState(false);
+  const [report, setReport] = useState(null);
+  const [error, setError] = useState("");
 
-const RAW_HOST = window.location.hostname.replace("www.", "");
+  const [stats, setStats] = useState({
+    totalAnalyses: 1284,
+    todayAnalyses: 43,
+    topCity: "Kocaeli",
+    lastAnalysis: "2 dk önce",
+    systemStatus: "Online"
+  });
 
-const HOST_MAP = {
-    "skorlama.com": "Skorlama.com",
-    "satinalai.com": "SatinalAI.com",
-    "kiralaai.com": "KiralaAI.com",
-    "temizai.com": "TemizAI.com",
-    "pintiai.com": "PintiAI.com",
-    "novqai.com": "NovqAI.com",
+  function updateField(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
 
-    "xn--satnalai-vkb.com": "SatınAlAI.com",
-    "xn--frsatai-rfb.com": "FırsatAI.com",
-    "xn--hafzaai-tfb.com": "HafızaAI.com"
-};
+  async function submitForm(e) {
+    e.preventDefault();
+    setLoading(true);
+    setReport(null);
+    setError("");
 
-const PAGE_HOST = HOST_MAP[RAW_HOST] || RAW_HOST;
-const PAGE_URL = window.location.href;
+    try {
+      const res = await fetch("/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...form,
+          budget_try: Number(form.budget_try),
+          holding_period_years: Number(form.holding_period_years),
+          credit_usage: form.credit_usage === "true"
+        })
+      });
 
-gtag("config", GA_ID, {
-    page_title: PAGE_HOST,
-    page_location: PAGE_URL,
-    send_page_view: true
-});
+      const data = await res.json();
 
-gtag("event", "portfolio_view", {
-    page_host: PAGE_HOST,
-    raw_host: RAW_HOST,
-    page_url: PAGE_URL
-});
-</script>
+      if (!res.ok || data.error) {
+        setError(data.error || "Rapor üretilemedi.");
+        return;
+      }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
+      setReport(data.report || null);
 
-body{
-    min-height:100vh;
-    background:
-        radial-gradient(circle at top, rgba(0,229,168,0.18), transparent 35%),
-        #0f1117;
-    color:white;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-.container{
-    max-width:1180px;
-    margin:auto;
-    padding:75px 20px;
-}
-
-.hero{
-    text-align:center;
-    margin-bottom:55px;
-}
-
-.badge{
-    display:inline-block;
-    margin-bottom:18px;
-    padding:8px 14px;
-    border:1px solid #00e5a8;
-    border-radius:999px;
-    color:#00e5a8;
-    font-size:14px;
-}
-
-.hero h1{
-    font-size:52px;
-    margin-bottom:15px;
-}
-
-.hero p{
-    color:#9ca3af;
-    font-size:19px;
-    max-width:760px;
-    margin:auto;
-    line-height:1.6;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
-}
-
-.card{
-    background:rgba(22,27,34,0.9);
-    border:1px solid #30363d;
-    border-radius:16px;
-    padding:25px;
-    transition:0.25s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-    border-color:#00e5a8;
-}
-
-.tag{
-    display:inline-block;
-    color:#00e5a8;
-    font-size:13px;
-    margin-bottom:14px;
-}
-
-.card h2{
-    margin-bottom:12px;
-    font-size:25px;
-}
-
-.card p{
-    color:#9ca3af;
-    margin-bottom:20px;
-    line-height:1.5;
-}
-
-.actions{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.button{
-    border:0;
-    cursor:pointer;
-    display:inline-block;
-    padding:10px 16px;
-    border-radius:8px;
-    background:#00e5a8;
-    color:black;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-.button.secondary{
-    background:transparent;
-    color:#00e5a8;
-    border:1px solid #00e5a8;
-}
-
-.contact-box{
-    margin-top:55px;
-    padding:24px;
-    border:1px solid #30363d;
-    border-radius:16px;
-    background:rgba(22,27,34,0.75);
-    text-align:center;
-}
-
-.contact-box p{
-    color:#9ca3af;
-    margin-bottom:8px;
-}
-
-.contact-box a{
-    color:#00e5a8;
-    font-size:20px;
-    font-weight:bold;
-    text-decoration:none;
-    word-break:break-all;
-}
-
-.footer{
-    text-align:center;
-    margin-top:35px;
-    color:#6b7280;
-    font-size:14px;
-}
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.72);
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    z-index:99;
-}
-
-.modal.open{
-    display:flex;
-}
-
-.modal-box{
-    width:100%;
-    max-width:480px;
-    background:#161b22;
-    border:1px solid #30363d;
-    border-radius:16px;
-    padding:24px;
-}
-
-.modal-box h2{
-    margin-bottom:6px;
-}
-
-.modal-box p{
-    color:#9ca3af;
-    margin-bottom:18px;
-}
-
-.input{
-    width:100%;
-    margin-bottom:12px;
-    padding:12px;
-    border-radius:8px;
-    border:1px solid #30363d;
-    background:#0f1117;
-    color:white;
-}
-
-.close{
-    float:right;
-    background:none;
-    border:0;
-    color:#9ca3af;
-    font-size:24px;
-    cursor:pointer;
-}
-
-@media(max-width:600px){
-    .hero h1{font-size:36px}
-    .container{padding-top:55px}
-    .contact-box a{font-size:17px}
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-    <div class="hero">
-        <div class="badge">Premium AI Domains For Sale</div>
-        <h1>Premium AI Domains</h1>
-        <p>
-            Curated collection of premium .com domains for AI startups,
-            automation, fintech, procurement, analytics and next-generation technology companies.
-        </p>
-    </div>
-
-    <div class="grid" id="domainGrid"></div>
-
-    <div class="contact-box">
-        <p>Business inquiries</p>
-        <a href="mailto:sahinemre@outlook.com">sahinemre@outlook.com</a>
-    </div>
-
-    <div class="footer">
-        © 2026 Premium AI Domain Portfolio
-    </div>
-
-</div>
-
-<div class="modal" id="offerModal">
-    <div class="modal-box">
-        <button class="close" onclick="closeModal()">×</button>
-        <h2>Make an Offer</h2>
-        <p id="modalDomainText"></p>
-
-        <input class="input" id="name" placeholder="Your name">
-        <input class="input" id="email" placeholder="Email">
-        <input class="input" id="company" placeholder="Company">
-        <input class="input" id="offer" placeholder="Offer amount / USD">
-        <textarea class="input" id="message" rows="4" placeholder="Message"></textarea>
-
-        <button class="button" onclick="sendOffer()">Send Offer</button>
-    </div>
-</div>
-
-<script>
-const DOMAINS = [
-    {
-        name:"skorlama.com",
-        category:"AI Scoring & Analytics",
-        description:"Premium domain for AI scoring, financial analytics, risk assessment and data intelligence products."
-    },
-    {
-        name:"satinalai.com",
-        category:"AI Procurement",
-        description:"Premium domain for AI-powered procurement, sourcing and purchasing platforms."
-    },
-    {
-        name:"satınalai.com",
-        category:"Turkish AI Purchasing",
-        description:"Turkish spelling protection domain for AI-powered purchasing and procurement."
-    },
-    {
-        name:"kiralaai.com",
-        category:"AI Rental Marketplace",
-        description:"Ideal for AI-powered rental marketplaces, property leasing and vehicle rental platforms."
-    },
-    {
-        name:"temizai.com",
-        category:"AI Cleaning & Hygiene",
-        description:"AI domain for cleaning, hygiene, robotics, facility services and home automation."
-    },
-    {
-        name:"hafızaai.com",
-        category:"AI Memory & Knowledge",
-        description:"Premium domain for AI memory, second brain, enterprise knowledge bases and RAG systems."
-    },
-    {
-        name:"fırsatai.com",
-        category:"AI Deals & Opportunities",
-        description:"AI domain for deals, discounts, campaigns, opportunity discovery and price alerts."
-    },
-    {
-        name:"pintiai.com",
-        category:"AI Savings",
-        description:"Memorable AI domain for smart savings, discount hunting and price intelligence."
-    },
-    {
-        name:"novqai.com",
-        category:"Global AI Brand",
-        description:"Short, brandable global AI domain for next-generation technology products."
+      setStats((prev) => ({
+        ...prev,
+        totalAnalyses: prev.totalAnalyses + 1,
+        todayAnalyses: prev.todayAnalyses + 1,
+        topCity: form.city || prev.topCity,
+        lastAnalysis: "şimdi"
+      }));
+    } catch (err) {
+      setError(String(err.message || err));
+    } finally {
+      setLoading(false);
     }
-];
+  }
 
-const grid = document.getElementById("domainGrid");
+  return (
+    <main style={styles.page}>
+      <div style={styles.liveStats}>
+        <div style={styles.liveDot}></div>
+        <strong>Live Platform Stats</strong>
+        <p>Toplam analiz: {stats.totalAnalyses.toLocaleString("tr-TR")}</p>
+        <p>Bugün: {stats.todayAnalyses}</p>
+        <p>En çok aranan: {stats.topCity}</p>
+        <p>Son analiz: {stats.lastAnalysis}</p>
+        <p>Durum: 🟢 {stats.systemStatus}</p>
+      </div>
 
-DOMAINS.forEach(domain => {
-    grid.innerHTML += `
-        <div class="card">
-            <span class="tag">${domain.category}</span>
-            <h2>${domain.name}</h2>
-            <p>${domain.description}</p>
-            <div class="actions">
-                <button class="button" onclick="openOffer('${domain.name}')">Make an Offer</button>
-                <a class="button secondary"
-                   onclick="trackRequestInfo('${domain.name}')"
-                   href="mailto:sahinemre@outlook.com?subject=${encodeURIComponent(domain.name + ' Domain Inquiry')}">
-                   Request Info
-                </a>
-            </div>
+      <section style={styles.acquisitionBanner}>
+        <strong>satinalai.com is available for acquisition or partnership.</strong>
+        <span> Contact: sahinemre@outlook.com</span>
+      </section>
+
+      <section style={styles.hero}>
+        <div>
+          <div style={styles.eyebrow}>sahinemre@outlook.com</div>
+          <h1 style={styles.title}>Gayrimenkul AI Analiz</h1>
+          <p style={styles.subtitle}>
+            Bilgileri gir, AI yatırım profilini çıkarsın; risk, bölge stratejisi,
+            finansal bakış ve net karar üretsin.
+          </p>
         </div>
-    `;
-});
+      </section>
 
-let selectedDomain = "";
+      <section style={styles.salesGrid}>
+        <div style={styles.salesCard}>
+          <h2>Platform Modules</h2>
+          <p>
+            SATINALAI yalnızca gayrimenkul değil, satın alma öncesi karar süreçleri
+            için geliştirilen modüler bir AI workflow platformudur.
+          </p>
+          <div style={styles.moduleList}>
+            <span>Real Estate</span>
+            <span>Land Investment</span>
+            <span>Electronics</span>
+            <span>Vehicle</span>
+            <span>Supplier</span>
+            <span>Product Comparison</span>
+            <span>Investment Scoring</span>
+          </div>
+        </div>
 
-function openOffer(domainName){
-    selectedDomain = domainName;
-    document.getElementById("modalDomainText").innerText = domainName;
-    document.getElementById("offerModal").classList.add("open");
+        <div style={styles.salesCard}>
+          <h2>Workflow Architecture</h2>
+          <p>
+            Kullanıcı girdisi yapılandırılmış AI analizine dönüştürülür ve React
+            rapor motoru tarafından profesyonel bir karar ekranı olarak sunulur.
+          </p>
+          <div style={styles.workflow}>
+            <span>User Input</span>
+            <b>→</b>
+            <span>AI Workflow</span>
+            <b>→</b>
+            <span>Structured JSON</span>
+            <b>→</b>
+            <span>React Report Engine</span>
+          </div>
+        </div>
+      </section>
 
-    gtag("event", "offer_click", {
-        domain_name: domainName,
-        page_host: PAGE_HOST,
-        raw_host: RAW_HOST
-    });
+      <form onSubmit={submitForm} style={styles.form}>
+        <input style={styles.input} name="city" placeholder="Şehir: Kocaeli" value={form.city} onChange={updateField} required />
+        <input style={styles.input} name="district" placeholder="İlçe / Bölge: Kartepe, Başiskele..." value={form.district} onChange={updateField} />
+        <input style={styles.input} name="budget_try" placeholder="Bütçe TL: 10000000" value={form.budget_try} onChange={updateField} required />
+        <input style={styles.input} name="holding_period_years" placeholder="Bekleme süresi yıl: 3" value={form.holding_period_years} onChange={updateField} />
+
+        <select style={styles.input} name="risk_preference" value={form.risk_preference} onChange={updateField}>
+          <option value="safe">Daha güvenli</option>
+          <option value="balanced">Dengeli</option>
+          <option value="aggressive">Yüksek getiri / yüksek risk</option>
+        </select>
+
+        <select style={styles.input} name="credit_usage" value={form.credit_usage} onChange={updateField}>
+          <option value="false">Kredi yok</option>
+          <option value="true">Kredi kullanacağım</option>
+        </select>
+
+        <textarea
+          style={{ ...styles.input, minHeight: 110 }}
+          name="extra_notes"
+          placeholder="Ek notlar: arsa almak istiyorum, 3 yıl beklerim..."
+          value={form.extra_notes}
+          onChange={updateField}
+          rows={5}
+        />
+
+        <button type="submit" disabled={loading} style={styles.button}>
+          {loading ? "Rapor hazırlanıyor..." : "Analiz Et"}
+        </button>
+      </form>
+
+      {error && (
+        <div style={styles.errorBox}>
+          <h3>Hata</h3>
+          <p>{error}</p>
+        </div>
+      )}
+
+      {report && (
+        <section style={styles.report}>
+          <div style={styles.headerCard}>
+            <p style={styles.brand}>{report.brand}</p>
+            <h2 style={{ margin: "8px 0 0" }}>Karar: {report.decision?.verdict}</h2>
+            <p style={{ marginTop: 12 }}>{report.executive_summary}</p>
+          </div>
+
+          <div style={styles.grid}>
+            <InfoCard title="Şehir" value={report.profile?.city} />
+            <InfoCard title="İlçe" value={report.profile?.district || "Belirtilmedi"} />
+            <InfoCard title="Bütçe" value={`${Number(report.profile?.budget_try || 0).toLocaleString("tr-TR")} TL`} />
+            <InfoCard title="Vade" value={`${report.profile?.holding_period_years || "-"} yıl`} />
+            <InfoCard title="Risk Profili" value={report.profile?.risk_preference} />
+            <InfoCard title="Ana Hedef" value={report.profile?.main_goal} />
+          </div>
+
+          <Panel title="Bölge Stratejisi">
+            <div style={styles.cardList}>
+              {report.region_strategy?.map((r, i) => (
+                <div key={i} style={styles.softCard}>
+                  <h3>{r.region} — {r.score}/10</h3>
+                  <p><b>Pozisyon:</b> {r.position}</p>
+                  <p>{r.why}</p>
+                  <p><b>Risk:</b> {r.risk}</p>
+                </div>
+              ))}
+            </div>
+          </Panel>
+
+          <Panel title="Finansal Bakış">
+            <p>{report.financial_view?.budget_comment}</p>
+            <table style={styles.table}>
+              <tbody>
+                <tr><td>Önerilen Alım Aralığı</td><td>{report.financial_view?.recommended_purchase_range_try}</td></tr>
+                <tr><td>Nakit Rezerv</td><td>{report.financial_view?.cash_reserve_try}</td></tr>
+                <tr><td>3 Yıl Baz Senaryo</td><td>{report.financial_view?.three_year_base_projection}</td></tr>
+                <tr><td>Alternatif Notu</td><td>{report.financial_view?.alternative_note}</td></tr>
+              </tbody>
+            </table>
+          </Panel>
+
+          <Panel title="Risk Analizi">
+            <div style={styles.cardList}>
+              {report.risk_analysis?.map((r, i) => (
+                <div key={i} style={styles.riskCard}>
+                  <h3>{r.risk}</h3>
+                  <p><b>Şiddet:</b> {r.severity}/5</p>
+                  <p><b>Olasılık:</b> {r.probability}</p>
+                  <p><b>Etkisi:</b> {r.impact}</p>
+                  <p><b>Önlem:</b> {r.mitigation}</p>
+                </div>
+              ))}
+            </div>
+          </Panel>
+
+          <div style={styles.decisionCard}>
+            <h2>Net Tavsiye: {report.decision?.verdict}</h2>
+            <p>{report.decision?.short_reason}</p>
+            <p><b>Maksimum fiyat:</b> {report.decision?.max_price_try}</p>
+            <h3>Aksiyon Planı</h3>
+            <ol>{report.decision?.action_steps?.map((s, i) => <li key={i}>{s}</li>)}</ol>
+          </div>
+
+          <footer style={styles.footer}>{report.disclaimer}</footer>
+        </section>
+      )}
+    </main>
+  );
 }
 
-function closeModal(){
-    document.getElementById("offerModal").classList.remove("open");
+function InfoCard({ title, value }) {
+  return (
+    <div style={styles.infoCard}>
+      <span>{title}</span>
+      <strong>{value || "-"}</strong>
+    </div>
+  );
 }
 
-function trackRequestInfo(domainName){
-    gtag("event", "request_info_click", {
-        domain_name: domainName,
-        page_host: PAGE_HOST,
-        raw_host: RAW_HOST
-    });
+function Panel({ title, children }) {
+  return (
+    <div style={styles.panel}>
+      <h2>{title}</h2>
+      {children}
+    </div>
+  );
 }
 
-function sendOffer(){
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const company = document.getElementById("company").value;
-    const offer = document.getElementById("offer").value;
-    const message = document.getElementById("message").value;
-
-    gtag("event", "offer_submit", {
-        domain_name: selectedDomain,
-        page_host: PAGE_HOST,
-        raw_host: RAW_HOST
-    });
-
-    const subject = encodeURIComponent(selectedDomain + " - Domain Offer");
-    const body = encodeURIComponent(
-`Hello,
-
-I would like to make an offer for ${selectedDomain}.
-
-Name: ${name}
-Email: ${email}
-Company: ${company}
-Offer: ${offer} USD
-
-Message:
-${message}`
-    );
-
-    window.location.href = `mailto:sahinemre@outlook.com?subject=${subject}&body=${body}`;
-}
-</script>
-
-</body>
-</html>
+const styles = {
+  page: {
+    minHeight: "100vh",
+    background: "#F5F5F0",
+    color: "#1B2A4A",
+    padding: 24,
+    fontFamily: "Arial, sans-serif"
+  },
+  acquisitionBanner: {
+    maxWidth: 980,
+    margin: "0 auto 18px",
+    padding: "14px 18px",
+    borderRadius: 16,
+    background: "#C4A962",
+    color: "#111",
+    fontSize: 15,
+    boxShadow: "0 8px 22px rgba(0,0,0,0.08)"
+  },
+  salesGrid: {
+    maxWidth: 980,
+    margin: "0 auto 24px",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gap: 16
+  },
+  salesCard: {
+    padding: 22,
+    borderRadius: 20,
+    background: "white",
+    border: "1px solid #E8E4DD",
+    boxShadow: "0 8px 22px rgba(0,0,0,0.05)"
+  },
+  moduleList: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 8,
+    marginTop: 14
+  },
+  workflow: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 8,
+    alignItems: "center",
+    marginTop: 14,
+    fontSize: 14
+  },
+  liveStats: {
+    position: "fixed",
+    top: 18,
+    right: 18,
+    zIndex: 50,
+    width: 230,
+    padding: 16,
+    borderRadius: 18,
+    background: "rgba(27, 42, 74, 0.94)",
+    color: "white",
+    boxShadow: "0 14px 36px rgba(0,0,0,0.18)",
+    border: "1px solid rgba(255,255,255,0.12)",
+    fontSize: 13
+  },
+  liveDot: {
+    width: 9,
+    height: 9,
+    borderRadius: "50%",
+    background: "#2D6A4F",
+    boxShadow: "0 0 0 6px rgba(45,106,79,0.22)",
+    position: "absolute",
+    top: 16,
+    right: 16
+  },
+  hero: {
+    maxWidth: 980,
+    margin: "0 auto 24px",
+    padding: 32,
+    borderRadius: 24,
+    background: "linear-gradient(135deg, #1B2A4A, #2A3D66)",
+    color: "white"
+  },
+  eyebrow: {
+    color: "#C4A962",
+    fontWeight: 800,
+    marginBottom: 10
+  },
+  title: {
+    fontSize: 42,
+    margin: 0
+  },
+  subtitle: {
+    fontSize: 18,
+    color: "#dbe4ff",
+    maxWidth: 720
+  },
+  form: {
+    maxWidth: 980,
+    margin: "0 auto",
+    display: "grid",
+    gap: 12,
+    padding: 24,
+    borderRadius: 20,
+    background: "white",
+    border: "1px solid #E8E4DD"
+  },
+  input: {
+    width: "100%",
+    padding: "14px 16px",
+    borderRadius: 12,
+    border: "1px solid #D8D3C8",
+    fontSize: 16
+  },
+  button: {
+    padding: "15px 20px",
+    border: 0,
+    borderRadius: 12,
+    background: "#1B2A4A",
+    color: "white",
+    fontSize: 17,
+    fontWeight: 800,
+    cursor: "pointer"
+  },
+  errorBox: {
+    maxWidth: 980,
+    margin: "24px auto",
+    padding: 20,
+    borderRadius: 16,
+    background: "#fff1f1",
+    color: "#8B2D2D",
+    border: "1px solid #ffd0d0"
+  },
+  report: {
+    maxWidth: 980,
+    margin: "32px auto",
+    display: "grid",
+    gap: 20
+  },
+  headerCard: {
+    padding: 28,
+    borderRadius: 22,
+    background: "linear-gradient(135deg, #1B2A4A, #2A3D66)",
+    color: "white"
+  },
+  brand: {
+    color: "#C4A962",
+    fontWeight: 800,
+    margin: 0
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+    gap: 14
+  },
+  infoCard: {
+    padding: 18,
+    borderRadius: 16,
+    background: "white",
+    borderLeft: "5px solid #C4A962",
+    boxShadow: "0 8px 20px rgba(0,0,0,0.05)"
+  },
+  panel: {
+    padding: 24,
+    borderRadius: 18,
+    background: "white",
+    border: "1px solid #E8E4DD"
+  },
+  cardList: {
+    display: "grid",
+    gap: 14
+  },
+  softCard: {
+    padding: 18,
+    borderRadius: 14,
+    background: "#F8F7F2",
+    border: "1px solid #E8E4DD"
+  },
+  riskCard: {
+    padding: 18,
+    borderRadius: 14,
+    background: "#fff8ec",
+    borderLeft: "5px solid #E67E22"
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse"
+  },
+  decisionCard: {
+    padding: 28,
+    borderRadius: 22,
+    background: "#C4A962",
+    color: "#111"
+  },
+  footer: {
+    padding: 18,
+    color: "#555",
+    fontSize: 14,
+    textAlign: "center"
+  }
+};
